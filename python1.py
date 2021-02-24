@@ -40,10 +40,15 @@ except IndexError:
 
 lastModified = last_modified_date.date()
 currentDate = datetime.today().date()
+diff = now - last_modified_date
+# diff = lastModified.strftime("%d/%m/%Y %H:%M:%S") - currentDate.strftime("%d/%m/%Y %H:%M:%S")
+
+#for the worst case scenario
+diffMinutes = diff.total_seconds()/60
 
 
 #Compare the dates
-if lastModified == currentDate:
+if lastModified == currentDate or diffMinutes <= 5:
     if 'RUN_STATUS' not in logFile:
         print(bcolors.FAIL + "NO RUN_STATUS" + bcolors.ENDC)
     if 'RUN_TIME' not in logFile:
